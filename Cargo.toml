@@ -5,6 +5,9 @@ version = "0.0.0"
 authors = ["studersi <rust@studer.si>"]
 edition = "2018"
 license-file = "LICENSE"
+readme = "README.md"
+documentation = "https://docs.rs/apache-rs"
+repository = "https://github.com/studersi/apache-rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
