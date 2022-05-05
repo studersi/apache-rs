@@ -1,0 +1,13 @@
+[package]
+
+name = "mod_hello_world"
+version = "0.0.1"
+
+[lib]
+name = "mod_hello_world"
+crate-type = ["dylib"]
+
+[dependencies]
+
+[dependencies.apache-rs]
+path = "../.."

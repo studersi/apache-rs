@@ -16,3 +16,8 @@ sudo apt install apache2-dev libapr1-dev
 cargo build
 cargo test --lib
 ```
+* Build Apache httpd module `mod_hello_world`
+```bash
+cd examples/mod_hello_world/
+cargo build
+```
