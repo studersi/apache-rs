@@ -1,10 +1,10 @@
 [package]
 
-name = "mod_hello_world"
+name = "mod_example"
 version = "0.0.1"
 
 [lib]
-name = "mod_hello_world"
+name = "mod_example"
 crate-type = ["dylib"]
 
 [dependencies]
