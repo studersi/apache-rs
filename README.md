@@ -3,6 +3,7 @@ apache-rs
 
 Rust FFI for creating Apache httpd modules.
 
+There is a bundled example implementing `mod_example` from the Apache httpd documentation: https://httpd.apache.org/docs/2.4/developer/modguide.html.
 
 
 Setup
@@ -70,3 +71,5 @@ sudo systemctl restart apache2
 * Navigate to http://localhost/example
 
 ### Container
+
+
