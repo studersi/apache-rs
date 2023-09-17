@@ -34,6 +34,13 @@ fn main() {
     // Tell cargo to invalidate the built crate whenever the wrapper changes.
     println!("cargo:rerun-if-changed={}", &wrapper_file_path);
 
+    let mut args: Vec<String> = vec![];
+    args.push("-I/usr/include/apache2".to_string());
+    args.push("-I/usr/include/apr-1.0".to_string());
+
+    #[cfg(target_pointer_width = "32")]
+    args.push("-Doff64_t=__off64_t".to_string());
+
     // The bindgen::Builder
     // Derived from https://rust-lang.github.io/rust-bindgen/tutorial-3.html
     let bindings = bindgen::Builder::default()
@@ -54,8 +61,7 @@ fn main() {
         // Add the includes for C header files.
         // Derived from https://httpd.apache.org/docs/2.4/developer/modguide.html
         // $ apxs -a -c mod_example.c
-        .clang_arg("-I/usr/include/apache2")
-        .clang_arg("-I/usr/include/apr-1.0")
+        .clang_args(args)
         // Tell cargo to invalidate the built crate whenever any of the
         // included header files changed.
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
