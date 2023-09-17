@@ -41,6 +41,13 @@ fn main() {
     #[cfg(target_pointer_width = "32")]
     args.push("-Doff64_t=__off64_t");
 
+    let mut args: Vec<String> = vec![];
+    args.push("-I/usr/include/apache2".to_string());
+    args.push("-I/usr/include/apr-1.0".to_string());
+
+    #[cfg(target_pointer_width = "32")]
+    args.push("-Doff64_t=__off64_t".to_string());
+
     // The bindgen::Builder
     // Derived from https://rust-lang.github.io/rust-bindgen/tutorial-3.html
     let bindings = bindgen::Builder::default()
