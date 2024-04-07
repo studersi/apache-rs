@@ -1,6 +1,6 @@
 extern crate apache_rs;
 
-use apache_rs::static_c_string;
+use apache_rs::{null_c_void, null_command_struct, null_module};
 use apache_rs::ffi::APR_HOOK_MIDDLE;
 use apache_rs::ffi::DECLINED;
 use apache_rs::ffi::MODULE_MAGIC_COOKIE;
@@ -16,7 +16,6 @@ use apache_rs::ffi::module;
 use apache_rs::ffi::request_rec;
 use apache_rs::ffi::strcmp;
 use std::convert::TryInto;
-use std::os::raw::c_char;
 use std::os::raw::c_int;
 use std::os::raw::c_void;
 
@@ -29,8 +28,8 @@ pub static mut example_module: module =
         minor_version: MODULE_MAGIC_NUMBER_MINOR,
         module_index: -1,
         name: c"mod_example".as_ptr(),
-        dynamic_load_handle: 0 as *mut c_void,
-        next: 0 as *mut module,
+        dynamic_load_handle: null_c_void!(),
+        next: null_module!(),
         magic: MODULE_MAGIC_COOKIE as u64,
         rewrite_args: None,
         create_dir_config: None,
@@ -38,7 +37,7 @@ pub static mut example_module: module =
         create_server_config: None,
         merge_server_config: None,
         flags: 0,
-        cmds: 0 as *mut command_struct,
+        cmds: null_command_struct!(),
         register_hooks: Some(c_example_hooks),
     };
 

@@ -9,3 +9,18 @@ pub mod ffi;
 macro_rules! static_c_string {
     ($the_string:literal) => { concat!($the_string, "\x00").as_bytes().as_ptr() as *const c_char }
 }
+
+#[macro_export]
+macro_rules! null_c_void {
+    () => { 0 as *mut c_void }
+}
+
+#[macro_export]
+macro_rules! null_module {
+    () => { 0 as *mut module }
+}
+
+#[macro_export]
+macro_rules! null_command_struct {
+    () => { 0 as *mut command_struct }
+}
