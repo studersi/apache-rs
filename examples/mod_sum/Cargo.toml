@@ -1,0 +1,16 @@
+[package]
+
+name = "mod_sum"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+name = "mod_sum"
+crate-type = ["dylib"]
+
+[dependencies]
+md5 = "0.7.0"
+sha1 = "0.10.6"
+
+[dependencies.apache-rs]
+path = "../.."

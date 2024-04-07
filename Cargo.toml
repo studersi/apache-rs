@@ -1,3 +1,9 @@
+[workspace]
+members = [
+    "examples/mod_example",
+    "examples/mod_sum",
+]
+
 [package]
 name = "apache-rs"
 description = "Rust FFI for creating Apache httpd modules."

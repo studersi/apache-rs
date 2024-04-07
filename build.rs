@@ -37,7 +37,7 @@ fn main() {
     // The bindgen::Builder
     // Derived from https://rust-lang.github.io/rust-bindgen/tutorial-3.html
     let bindings = bindgen::Builder::default()
-        // Use sigend integer per default for magic numbers defined as macro
+        // Use signed integer per default for magic numbers defined as macro
         .default_macro_constant_type(bindgen::MacroTypeVariation::Signed)
         // 128-bit integers do not have a stable ABI, so we need to remove functions that make use of them
         .blocklist_function("qecvt")
