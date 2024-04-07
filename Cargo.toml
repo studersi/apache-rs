@@ -12,6 +12,6 @@ repository = "https://github.com/studersi/apache-rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-bindgen = "0.59.2"
+bindgen = "0.69.4"
 
 [dependencies]
