@@ -25,8 +25,8 @@ use std::os::raw::c_void;
 #[no_mangle]
 pub static mut example_module: module =
     module {
-        version: MODULE_MAGIC_NUMBER_MAJOR as i32,
-        minor_version: MODULE_MAGIC_NUMBER_MINOR as i32,
+        version: MODULE_MAGIC_NUMBER_MAJOR,
+        minor_version: MODULE_MAGIC_NUMBER_MINOR,
         module_index: -1,
         name: c"mod_example".as_ptr(),
         dynamic_load_handle: 0 as *mut c_void,
@@ -57,7 +57,7 @@ unsafe extern "C" fn c_example_handler(r: *mut request_rec) -> c_int {
      * and the server will try somewhere else.
      */
     if (*r).handler == std::ptr::null() || strcmp((*r).handler, c"example-handler".as_ptr()) != 0 {
-        return DECLINED as i32;
+        return DECLINED;
     }
 
     /* Now that we are handling this request, we'll write out "Hello, world!" to the client.
@@ -69,5 +69,5 @@ unsafe extern "C" fn c_example_handler(r: *mut request_rec) -> c_int {
     /* Lastly, we must tell the server that we took care of this request and everything went fine.
      * We do so by simply returning the value OK to the server.
      */
-    return OK as i32;
+    return OK;
 }

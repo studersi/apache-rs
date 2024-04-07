@@ -35,6 +35,8 @@ fn main() {
     // The bindgen::Builder
     // Derived from https://rust-lang.github.io/rust-bindgen/tutorial-3.html
     let bindings = bindgen::Builder::default()
+        // Use sigend integer per default for magic numbers defined as macro
+        .default_macro_constant_type(bindgen::MacroTypeVariation::Signed)
         // The input header we would like to generate bindings for.
         .header("wrapper.h")
         // Add the includes for C header files.
