@@ -28,7 +28,7 @@ pub static mut example_module: module =
         version: MODULE_MAGIC_NUMBER_MAJOR as i32,
         minor_version: MODULE_MAGIC_NUMBER_MINOR as i32,
         module_index: -1,
-        name: static_c_string!("mod_example"),
+        name: c"mod_example".as_ptr(),
         dynamic_load_handle: 0 as *mut c_void,
         next: 0 as *mut module,
         magic: MODULE_MAGIC_COOKIE as u64,
@@ -56,15 +56,15 @@ unsafe extern "C" fn c_example_handler(r: *mut request_rec) -> c_int {
      * If it is, we accept it and do our things, if not, we simply return DECLINED,
      * and the server will try somewhere else.
      */
-    if (*r).handler == std::ptr::null() || strcmp((*r).handler, static_c_string!("example-handler")) != 0 {
+    if (*r).handler == std::ptr::null() || strcmp((*r).handler, c"example-handler".as_ptr()) != 0 {
         return DECLINED as i32;
     }
 
     /* Now that we are handling this request, we'll write out "Hello, world!" to the client.
      * To do so, we must first set the appropriate content type, followed by our output.
      */
-    ap_set_content_type(r, static_c_string!("text/html; charset=utf-8"));
-    ap_rprintf(r, static_c_string!("Hello world!"));
+    ap_set_content_type(r, c"text/html; charset=utf-8".as_ptr());
+    ap_rprintf(r, c"Hello world!".as_ptr());
 
     /* Lastly, we must tell the server that we took care of this request and everything went fine.
      * We do so by simply returning the value OK to the server.
