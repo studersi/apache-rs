@@ -39,6 +39,16 @@ fn main() {
     let bindings = bindgen::Builder::default()
         // Use sigend integer per default for magic numbers defined as macro
         .default_macro_constant_type(bindgen::MacroTypeVariation::Signed)
+        // 128-bit integers do not have a stable ABI, so we need to remove functions that make use of them
+        .blocklist_function("qecvt")
+        .blocklist_function("qecvt_r")
+        .blocklist_function("qfcvt")
+        .blocklist_function("qfcvt_r")
+        .blocklist_function("qgcvt")
+        .blocklist_function("strfromf64x")
+        .blocklist_function("strfroml")
+        .blocklist_function("strtof64x")
+        .blocklist_function("strtold")
         // The input header we would like to generate bindings for.
         .header(&wrapper_file_path)
         // Add the includes for C header files.
