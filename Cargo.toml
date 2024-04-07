@@ -1,7 +1,7 @@
 [package]
 name = "apache-rs"
 description = "Rust FFI for creating Apache httpd modules."
-version = "0.0.2"
+version = "0.0.3"
 authors = ["studersi <rust@studer.si>"]
 edition = "2018"
 license-file = "LICENSE"
