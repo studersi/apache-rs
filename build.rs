@@ -7,8 +7,10 @@ use std::io::Write;
 
 fn main() {
 
+    let wrapper_file_path = format!("{}/{}", env::var("OUT_DIR").expect("env var should be set"), "wrapper.h");
+
     // Open the wrapper file
-    let mut wrapper_file = File::create("./wrapper.h").unwrap();
+    let mut wrapper_file = File::create(&wrapper_file_path).unwrap();
 
     // List the relevant header files to build bindings for.
     let header_files_apache: Vec<String> = fs::read_dir("/usr/include/apache2").unwrap().map(|r| r.unwrap().file_name().to_str().unwrap().into()).collect();
@@ -30,7 +32,7 @@ fn main() {
     }
 
     // Tell cargo to invalidate the built crate whenever the wrapper changes.
-    println!("cargo:rerun-if-changed=wrapper.h");
+    println!("cargo:rerun-if-changed={}", &wrapper_file_path);
 
     // The bindgen::Builder
     // Derived from https://rust-lang.github.io/rust-bindgen/tutorial-3.html
@@ -38,7 +40,7 @@ fn main() {
         // Use sigend integer per default for magic numbers defined as macro
         .default_macro_constant_type(bindgen::MacroTypeVariation::Signed)
         // The input header we would like to generate bindings for.
-        .header("wrapper.h")
+        .header(&wrapper_file_path)
         // Add the includes for C header files.
         // Derived from https://httpd.apache.org/docs/2.4/developer/modguide.html
         // $ apxs -a -c mod_example.c
