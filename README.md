@@ -58,6 +58,7 @@ sudo apxs -i -a -n example ./target/debug/libmod_example.so
 ```bash
 sudo tee /etc/apache2/mods-enabled/example.conf > /dev/null <<EOT
 <IfModule example_module>
+    AddHandler example-handler .sum
     <Location "/example">
         SetHandler example-handler
     </Location>
