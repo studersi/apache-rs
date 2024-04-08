@@ -1,6 +1,9 @@
 mod_sum
 =======
 
+A simple Apache httpd handler similar to the hashing handler described in [Developing modules for the Apache HTTP Server 2.4 - top
+Building a handler](https://httpd.apache.org/docs/2.4/developer/modguide.html#handling).
+
 
 
 Setup
