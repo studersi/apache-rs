@@ -117,7 +117,12 @@ unsafe extern "C" fn c_sum_handler(r: *mut request_rec) -> c_int {
             "unknown type, could not calculate has sum".to_string()
         }
     };
-    ap_rprintf(r, CString::new(format!("<b>digest:</b> {}<br/>", digest)).unwrap().as_ptr());
+
+    ap_rprintf(r, CString::new(format!("<b>digest:</b> <code>{}</code><br/>", digest)).unwrap().as_ptr());
+    ap_rprintf(r, CString::new("<br/><a href='?'>View without hash</a>").unwrap().as_ptr());
+    ap_rprintf(r, CString::new("<br/><a href='?digest=md5'>View the MD5 hash</a>").unwrap().as_ptr());
+    ap_rprintf(r, CString::new("<br/><a href='?digest=sha1'>View the SHA1 hash</a>").unwrap().as_ptr());
+    ap_rprintf(r, CString::new("<br/><a href='?digest=invalid'>View with invalid hash</a>").unwrap().as_ptr());
 
     /* Let the server know that we responded to this request. */
     return OK;
