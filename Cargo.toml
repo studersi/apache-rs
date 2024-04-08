@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "examples/mod_example",
+    "examples/mod_hello",
     "examples/mod_sum",
 ]
 

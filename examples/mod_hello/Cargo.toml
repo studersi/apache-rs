@@ -1,11 +1,11 @@
 [package]
 
-name = "mod_example"
+name = "mod_hello"
 version = "0.0.4"
 edition = "2021"
 
 [lib]
-name = "mod_example"
+name = "mod_hello"
 crate-type = ["dylib"]
 
 [dependencies]

@@ -22,12 +22,12 @@ use std::os::raw::c_void;
 
 #[allow(unused_unsafe)]
 #[no_mangle]
-pub static mut example_module: module =
+pub static mut hello_module: module =
     module {
         version: MODULE_MAGIC_NUMBER_MAJOR,
         minor_version: MODULE_MAGIC_NUMBER_MINOR,
         module_index: -1,
-        name: c"mod_example".as_ptr(),
+        name: c"mod_hello".as_ptr(),
         dynamic_load_handle: null_c_void!(),
         next: null_module!(),
         magic: MODULE_MAGIC_COOKIE as u64,
@@ -38,24 +38,24 @@ pub static mut example_module: module =
         merge_server_config: None,
         flags: 0,
         cmds: null_command_struct!(),
-        register_hooks: Some(c_example_hooks),
+        register_hooks: Some(c_hello_hooks),
     };
 
-extern "C" fn c_example_hooks(_: *mut apr_pool_t) {
+extern "C" fn c_hello_hooks(_: *mut apr_pool_t) {
     unsafe {
-        ap_hook_handler(Some(c_example_handler),
+        ap_hook_handler(Some(c_hello_handler),
             std::ptr::null(),
             std::ptr::null(),
             APR_HOOK_MIDDLE.try_into().unwrap());
     };
 }
 
-unsafe extern "C" fn c_example_handler(r: *mut request_rec) -> c_int {
-    /* First off, we need to check if this is a call for the "example-handler" handler.
+unsafe extern "C" fn c_hello_handler(r: *mut request_rec) -> c_int {
+    /* First off, we need to check if this is a call for the "hello-handler" handler.
      * If it is, we accept it and do our things, if not, we simply return DECLINED,
      * and the server will try somewhere else.
      */
-    if (*r).handler == std::ptr::null() || strcmp((*r).handler, c"example-handler".as_ptr()) != 0 {
+    if (*r).handler == std::ptr::null() || strcmp((*r).handler, c"hello-handler".as_ptr()) != 0 {
         return DECLINED;
     }
 

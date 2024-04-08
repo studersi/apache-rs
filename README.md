@@ -3,7 +3,7 @@ apache-rs
 
 Rust FFI for creating Apache httpd modules.
 
-There is a bundled example implementing `mod_example` from the Apache httpd documentation: https://httpd.apache.org/docs/2.4/developer/modguide.html.
+There is a bundled example implementing `mod_hello` from the Apache httpd documentation: https://httpd.apache.org/docs/2.4/developer/modguide.html.
 
 
 
@@ -45,10 +45,10 @@ cargo test --lib
 
 ### Apache httpd module
 
-* Build Apache httpd module `mod_example`
+* Build Apache httpd module `mod_hello`
 
 ```bash
-cd examples/mod_example/
+cd examples/mod_hello/
 cargo build
 ```
 
@@ -63,9 +63,9 @@ Test
 * Build and install modules
 
 ```bash
-cd examples/mod_example/
+cd examples/mod_hello/
 cargo build
-sudo apxs -i -a -n example ./target/debug/libmod_example.so
+sudo apxs -i -a -n example ./target/debug/libmod_hello.so
 ```
 
 ```bash
@@ -77,14 +77,14 @@ sudo apxs -i -a -n sum ./target/debug/libmod_sum.so
 * Add module configurations
 
 ```bash
-sudo tee /etc/apache2/mods-available/example.conf > /dev/null <<EOT
-<IfModule example_module>
-    <Location "/example">
-        SetHandler example-handler
+sudo tee /etc/apache2/mods-available/hello.conf > /dev/null <<EOT
+<IfModule hello_module>
+    <Location "/hello">
+        SetHandler hello-handler
     </Location>
 </IfModule>
 EOT
-sudo a2enmod example
+sudo a2enmod hello
 ```
 
 ```bash
