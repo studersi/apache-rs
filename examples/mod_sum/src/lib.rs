@@ -109,7 +109,7 @@ unsafe extern "C" fn c_sum_handler(r: *mut request_rec) -> c_int {
         }
         "sha1" => {
             let mut hasher = Sha1::new();
-            hasher.update(b"hello world");
+            hasher.update(file_content.as_bytes());
             let result = hasher.finalize();
             format!("{:x}", result)
         }
