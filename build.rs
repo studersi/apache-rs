@@ -34,12 +34,12 @@ fn main() {
     // Tell cargo to invalidate the built crate whenever the wrapper changes.
     println!("cargo:rerun-if-changed={}", &wrapper_file_path);
 
-    let mut args: Vec<String> = vec![];
-    args.push("-I/usr/include/apache2".to_string());
-    args.push("-I/usr/include/apr-1.0".to_string());
+    let mut args: Vec<&str> = vec![];
+    args.push("-I/usr/include/apache2");
+    args.push("-I/usr/include/apr-1.0");
 
     #[cfg(target_pointer_width = "32")]
-    args.push("-Doff64_t=__off64_t".to_string());
+    args.push("-Doff64_t=__off64_t");
 
     // The bindgen::Builder
     // Derived from https://rust-lang.github.io/rust-bindgen/tutorial-3.html
