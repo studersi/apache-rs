@@ -17,7 +17,6 @@ use apache_rs::ffi::module;
 use apache_rs::ffi::request_rec;
 use apache_rs::ffi::strcmp;
 use apache_rs::ffi::{APR_HOOK_MIDDLE, apr_table_get, apr_table_make};
-use apache_rs::{null_c_void, null_command_struct, null_module};
 use core::ffi::CStr;
 use md5;
 use sha1::Digest;
@@ -37,8 +36,8 @@ pub static mut sum_module: module =
         minor_version: MODULE_MAGIC_NUMBER_MINOR,
         module_index: -1,
         name: c"mod_sum".as_ptr(),
-        dynamic_load_handle: null_c_void!(),
-        next: null_module!(),
+        dynamic_load_handle: 0 as *mut c_void,
+        next: 0 as *mut module,
         magic: MODULE_MAGIC_COOKIE as u64,
         rewrite_args: None,
         create_dir_config: None,
@@ -46,7 +45,7 @@ pub static mut sum_module: module =
         create_server_config: None,
         merge_server_config: None,
         flags: 0,
-        cmds: null_command_struct!(),
+        cmds: 0 as *mut command_struct,
         register_hooks: Some(c_sum_hooks),
     };
 
