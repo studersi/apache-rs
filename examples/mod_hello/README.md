@@ -67,5 +67,5 @@ apache2 -f "$(pwd)/tests/apache2.conf" -X
 
 * Run Hurl tests
 ```bash
-hurl --test tests/hello.hurl
+hurl --test tests/*.hurl
 ```

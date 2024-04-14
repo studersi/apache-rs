@@ -1,4 +1,4 @@
-GET http://localhost:8080/hello
+GET http://localhost:8081/hello
 HTTP 200
 
 [Asserts]
